@@ -1,0 +1,8 @@
+{
+    "local": {
+        "port": 1545,
+        "loggingMode": "debug",
+        "googleSecret": "39KUuW7TS9K14H5AdH7IpKtH",
+        "goOutsideSecret": "58e3ca16-4a50-46a9-8dfd-22285123300d"
+    }
+}

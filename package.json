@@ -1,0 +1,30 @@
+{
+  "name": "GoOutside",
+  "version": "0.1.0",
+  "description": "Go Outside And Play - Screen Time",
+  "main": "index.js",
+  "repository": "localhost",
+  "author": "Matt Stone",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "bole": "^3.0.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "https": "^1.0.0",
+    "morgan": "^1.9.0",
+    "node-fetch": "^1.7.3",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^1.0.0",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.2",
+    "chai": "^4.1.2",
+    "eslint": "^4.12.1",
+    "eslint-config-defaults": "^9.0.0",
+    "eslint-plugin-react": "^7.5.1",
+    "mocha": "^4.0.1",
+    "sinon": "^4.1.2"
+  }
+}
