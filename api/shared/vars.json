@@ -1,8 +1,12 @@
 {
     "local": {
+        "server": "http://localhost",
         "port": 1545,
         "loggingMode": "debug",
         "googleSecret": "39KUuW7TS9K14H5AdH7IpKtH",
-        "goOutsideSecret": "58e3ca16-4a50-46a9-8dfd-22285123300d"
+        "goOutsideSecret": "58e3ca16-4a50-46a9-8dfd-22285123300d",        
+        "goOutsidePublic": "0badba88-f727-4c4e-b09f-673331c0bbd4",
+
+        "identity_cache_checkInterval": 600
     }
 }
