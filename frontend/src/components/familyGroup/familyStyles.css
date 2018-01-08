@@ -1,0 +1,26 @@
+.img-circle-parent { width: 70px; height: 70px}
+.img-circle-kid { width: 50px; height: 50px}
+
+.td-family-outside { 
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px
+}
+
+.family-header {
+    display: inline-block;
+}
+
+.family-header-text {    
+    font-size: 30px;
+    margin-inline-end: 5px;
+}
+
+#editFamily.glyphicon {
+    text-align: right;
+    vertical-align: top;
+    padding-top: 7px;
+    margin-left: 5px;
+    font-weight: lighter;
+    color: white;
+}
