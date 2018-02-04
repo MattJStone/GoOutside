@@ -19,7 +19,7 @@ class FamilyGroupsPage extends Component {
 
         return (
           <div>
-            <h1>Family Groups</h1>
+            <h1>Family Groups</h1>            
             <div>
               <FamilyGroupList familyGroups={familyGroups} />
             </div>

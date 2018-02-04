@@ -1,5 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import { withStyles } from 'material-ui-next/styles';
+import AppBar from 'material-ui-next/AppBar';
+import Toolbar from 'material-ui-next/Toolbar';
+import Typography from 'material-ui-next/Typography';
+import Button from 'material-ui-next/Button';
+
+import FontAwesome from 'react-fontawesome';
+import blueGrey from 'material-ui-next/colors/blueGrey';
 
 const setActiveButton = (params) => {
   const btn = params.target;
@@ -13,23 +23,57 @@ const setActiveButton = (params) => {
   });
 };
 
-const Navigation = () => (
-  <nav className="navbar navbar-inverse">
-    <div className="container-fluid">
-      <div className="navbar-header">
-        <a className="navbar-brand" href="#">WebSiteName</a>
-      </div>
-      <ul id="navPages" className="nav navbar-nav">
-        <li id="home" className="active"> <Link to="/" onClick={setActiveButton}>Home</Link></li>
-        <li id="time"><Link to="/time" onClick={setActiveButton}>Time</Link></li>
-        <li id="page2"><Link to="#" onClick={setActiveButton}>Page 2</Link></li>
-        <li id="page3"><Link to="#" onClick={setActiveButton}>Page 3</Link></li>
-      </ul>
-      <ul className="nav navbar-nav navbar-right">
-        <li><a href="#"><span className="glyphicon glyphicon-user" /> Sign Up</a></li>
-        <li><a href="#"><span className="glyphicon glyphicon-log-in" /> Login</a></li>
-      </ul>
-    </div>
-  </nav>);
+const styles = {
+  root: {
+    width: '100%',
+  },
+  appBar: {
+    background: 'black',
+  },
+  flex: {
+    flex: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+};
 
-export default Navigation;
+class Navigation extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      auth: true, // Are they logged in and authenticated
+    };
+  }
+
+
+  render() {
+    const { classes } = this.props;
+    console.log(this.state.auth);
+    return (
+      <div className={this.props.classes.root}>
+        <AppBar className={classes.appBar} position="static">
+          <Toolbar>
+            <Typography type="display2" color="inherit" className={classes.flex}>
+              GoOutside
+            </Typography>
+            {
+
+          this.state.auth && (
+            <FontAwesome name="cog" />
+          )
+        }
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
+}
+
+Navigation.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Navigation);
