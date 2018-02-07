@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { withStyles } from 'material-ui-next/styles';
 import AppBar from 'material-ui-next/AppBar';
 import Toolbar from 'material-ui-next/Toolbar';
 import Typography from 'material-ui-next/Typography';
-import Button from 'material-ui-next/Button';
 
 import FontAwesome from 'react-fontawesome';
-import blueGrey from 'material-ui-next/colors/blueGrey';
+
 
 const setActiveButton = (params) => {
   const btn = params.target;
@@ -44,7 +44,7 @@ class Navigation extends Component {
     super(props, context);
 
     this.state = {
-      auth: true, // Are they logged in and authenticated
+      auth: props.user, // Are they logged in and authenticated
     };
   }
 
@@ -56,7 +56,7 @@ class Navigation extends Component {
       <div className={this.props.classes.root}>
         <AppBar className={classes.appBar} position="static">
           <Toolbar>
-            <Typography type="display2" color="inherit" className={classes.flex}>
+            <Typography type="headline" color="inherit" className={classes.flex}>
               GoOutside
             </Typography>
             {
@@ -74,6 +74,11 @@ class Navigation extends Component {
 
 Navigation.propTypes = {
   classes: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Navigation);
+const mapStateToProps = state => ({
+    user: state.user,
+  });
+
+export default withStyles(styles)(connect(mapStateToProps)(Navigation));

@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import * as familyGroupActions from '../../actions/familyGroupsAction';
 import FamilyGroupList from './FamilyGroupsList';
+import PageHeader from '../../common/PageHeading';
+
 
 class FamilyGroupsPage extends Component {
     componentDidMount() {
-        this.props.getFamilyGroups();
+        if (this.props.user) {
+            this.props.getFamilyGroups();
+        } else {
+            // redirect to the sign in page to authenticate the user
+            this.props.history.push('/signin');
+        }
       }
 
 
@@ -16,13 +24,20 @@ class FamilyGroupsPage extends Component {
 
         if (!familyGroups) return <div>loading...</div>;
 
+        familyGroups.push({ id: 'empty', name: 'Create a new family to control!' });
 
         return (
           <div>
-            <h1>Family Groups</h1>            
-            <div>
-              <FamilyGroupList familyGroups={familyGroups} />
-            </div>
+            <PageHeader
+              title="Family Groups"
+              subHeading={familyGroups.length > 0
+                    ? 'Here are all the families you are a member of.'
+                    : 'Wow! Such empty. You need to start a family...'}
+            />
+
+
+            <FamilyGroupList familyGroups={familyGroups} />
+
           </div>
         );
     }
@@ -31,12 +46,15 @@ class FamilyGroupsPage extends Component {
 FamilyGroupsPage.propTypes = {
     familyGroups: PropTypes.array.isRequired,
     getFamilyGroups: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
+    history: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
     return {
         familyGroups: state.familyGroups,
+
     };
 }
 
-export default connect(mapStateToProps, familyGroupActions)(FamilyGroupsPage);
+export default connect(mapStateToProps, familyGroupActions)(withRouter(FamilyGroupsPage));

@@ -9,6 +9,7 @@ import FamilyGroupMembers from './FamilyGroupMembers';
 import FamilyHeader from './FamilyHeader';
 import SchedulePage from '../schedule/SchedulePage';
 
+
 class FamilyGroupPage extends Component {
   constructor(props) {
     super(props);
