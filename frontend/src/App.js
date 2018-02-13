@@ -9,7 +9,7 @@ import Theme from '../src/styles/theme';
 import Navigation from './common/Navigation';
 import FamilyGroups from './components/familyGroups/FamilyGroupsPage';
 import FamilyGroup from './components/familyGroup/FamilyGroupPage';
-import Signin from './components/auth/SignInPage';
+import Signin from './components/auth/SignInPageYolo';
 
 import TextField from 'material-ui-next/TextField';
 
@@ -18,7 +18,7 @@ class App extends Component {
   render() {
       return (
         <div>
-        <Theme>
+          <Theme>
           <BrowserRouter>
 
             <Loadable active={this.props.spinner.display} spinner text={this.props.spinner.spinnerText} >
@@ -28,12 +28,12 @@ class App extends Component {
               <section className="main-content-wrapper">
                 <Route exact path="/" component={FamilyGroups} />
                 <Route path="/familyGroup/:familyGroupId" component={FamilyGroup} />
-                <Route path="/signin" component={Signin} />
-              </section>              
+                <Route path="/signin" component={Signin} />                
+              </section>
             </Loadable>
 
           </BrowserRouter>
-          </Theme>
+        </Theme>
         </div>
 
       );

@@ -13,6 +13,9 @@ import Blue from 'material-ui-next/colors/blue';
 
 import FontAwesome from 'react-fontawesome';
 
+import { GoogleLogin } from 'react-google-login';
+
+
 const required = value => (value ? undefined : 'This field is required');
 
 const renderField = ({
@@ -75,53 +78,79 @@ const styles = theme => ({
       backgroundColor: Blue[500],
       color: 'white',
       textTransform: 'None',
+      width: '100%',
     },
 });
 
-const googleAuth = () => {
-  const user = {
-    id: '00-010',
-    login: 'matt.stone77@gmail.com',
-    oauth: 'google',
-  };
+const success = (res) => {
+  console.log(`success ${res}`);
 
-  this.props.handleSubmit(user);
+  this.props.googleSignIn(res);
+};
+
+const fail = (res) => {
+  console.log(res);
+};
+
+
+const responseGoogle = (response) => {
+  console.log(response);
+};
+
+
+
+const googleYolo = () => {
+
 };
 
  const SigninForm = (props) => {
     const { handleSubmit, classes } = props;
 
+
     return (
 
-      <form onSubmit={handleSubmit} style={{ width: '650px' }}>
-
+//      <form onSubmit={handleSubmit} style={{ width: '650px' }}>
+      <div style={{ width: '650px' }}>
         <Grid container justify="center" alignItems="center" spacing={24}>
 
-          <Grid item md={6} lg={6}>
+          <Grid item md={6} lg={6} style={{ marginTop: 40 }}>
             <img src="/stockImages/gooutisideLogin.jpg" alt="logo" />
           </Grid>
           <Grid item md={6} lg={6}>
             <div className={classes.heading}>
               <Typography type="title">Sign in</Typography>
             </div>
-            <Button fullWidth raised className={classes.authButton} onClick={googleAuth} >
-              <FontAwesome name="google" />
-              Sign in with Google
-            </Button>
-            <Typography type="caption" align="center" style={{ marginBottom: 5, marginTop: 15 }}>-- or --</Typography>
 
-            <Field name="username" type="text" component={renderField} label="Email address" fullWidth required />
-            <Field name="password" type="password" component={renderField} label="Password" fullWidth required />
-            <Button raised fullWidth color="primary" id="Signin" type="submit" style={{ marginTop: '15px', marginBottom: '12px', textTransform: 'none' }}>
-            Sign in
-            </Button>
-            <Button fullWidth className={classes.linkButton} href="#">Hmm... I seem to have forgotten my password</Button>
+            <GoogleLogin
+              clientId="271043031369-oagnkm1jgea0qgn8mk33fcdf1407pu4n.apps.googleusercontent.com"
+              buttonText="Sign in with Google"
+              onSuccess={props.googleSignIn}
+              onFailure={responseGoogle}
+              style={{
+                backgroundColor: Blue[500],
+                color: 'white',
+                textTransform: 'None',
+                width: '100%',
+                fontWeight: 'normal',
+                paddingTop: 10,
+                paddingBottom: 10,
+                borderRadius: 2,
+                border: '1px solid transparent',
+                fontSize: 14,
+                fontFamily: 'Roboto',
+              }}
+            >
+              <FontAwesome
+                name="google"
+              />
+              <span> Sign in with Google</span>
+            </GoogleLogin>
 
           </Grid>
         </Grid>
 
-
-      </form>
+      </div>
+      // </form>
     );
   };
 

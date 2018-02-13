@@ -5,11 +5,14 @@ import { connect } from 'react-redux';
 
 import { withStyles } from 'material-ui-next/styles';
 import AppBar from 'material-ui-next/AppBar';
+import Button from 'material-ui-next/Button';
 import Toolbar from 'material-ui-next/Toolbar';
 import Typography from 'material-ui-next/Typography';
 
 import FontAwesome from 'react-fontawesome';
 
+
+import * as actions from '../actions/authActions';
 
 const setActiveButton = (params) => {
   const btn = params.target;
@@ -39,19 +42,29 @@ const styles = {
   },
 };
 
-class Navigation extends Component {
-  constructor(props, context) {
-    super(props, context);
 
-    this.state = {
-      auth: props.user, // Are they logged in and authenticated
-    };
+class Navigation extends Component {
+  constructor(props) {
+    super(props);
+
+
+    this.logOut = this.logOut.bind(this);
   }
 
+  logOut() {
+    const auth2 = window.gapi.auth2.getAuthInstance();
+
+        if (auth2.isSignedIn.get()) {
+          auth2.signOut().then(() => {
+            console.log('Google User signed out.');
+            this.props.signOut();
+          });
+  }
+}
 
   render() {
     const { classes } = this.props;
-    console.log(this.state.auth);
+
     return (
       <div className={this.props.classes.root}>
         <AppBar className={classes.appBar} position="static">
@@ -61,8 +74,10 @@ class Navigation extends Component {
             </Typography>
             {
 
-          this.state.auth && (
-            <FontAwesome name="cog" />
+          this.props.user && (
+            <Button variant="flat" onClick={this.logOut} >
+              <FontAwesome name="cog" color="white" />
+            </Button>
           )
         }
           </Toolbar>
@@ -75,10 +90,11 @@ class Navigation extends Component {
 Navigation.propTypes = {
   classes: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
+  signOut: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
     user: state.user,
   });
 
-export default withStyles(styles)(connect(mapStateToProps)(Navigation));
+export default withStyles(styles)(connect(mapStateToProps, actions)(Navigation));

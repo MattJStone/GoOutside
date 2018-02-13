@@ -9,8 +9,16 @@ import PageHeader from '../../common/PageHeading';
 
 
 class FamilyGroupsPage extends Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            familyGroups: [],
+        };
+    }
+
     componentDidMount() {
-        if (this.props.user) {
+        console.log('Family group page is mounted');
+        if (this.props.user.signedIn) {
             this.props.getFamilyGroups();
         } else {
             // redirect to the sign in page to authenticate the user
@@ -18,12 +26,22 @@ class FamilyGroupsPage extends Component {
         }
       }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.familyGroups !== this.state.familyGroups) {
+            this.setState({ familyGroups: nextProps.familyGroups });
+        }
+
+        if (!nextProps.user.signedIn && this.props.user.signedIn) {
+            this.setState({ familyGroups: [] });
+            this.props.history.push('/signin');
+        }
+    }
 
     render() {
-        const { familyGroups } = this.props;
+        const { familyGroups } = this.state;
 
-        if (!familyGroups) return <div>loading...</div>;
-
+        if (familyGroups.length === 0) return <div>loading...</div>;
+        
         familyGroups.push({ id: 'empty', name: 'Create a new family to control!' });
 
         return (
@@ -47,13 +65,13 @@ FamilyGroupsPage.propTypes = {
     familyGroups: PropTypes.array.isRequired,
     getFamilyGroups: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
-    history: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
     return {
         familyGroups: state.familyGroups,
-
+        user: state.user,
     };
 }
 

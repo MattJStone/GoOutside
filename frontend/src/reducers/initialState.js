@@ -1,4 +1,8 @@
 export default {
+    user: {
+        signedIn: false,
+        user: {},
+    },
     familyGroups: [],
     familyGroup: {},
     schedule: {
@@ -33,6 +37,6 @@ export default {
             allowedTime: 180,
             members: [],
         }],
-    },
+    },    
 };
 

@@ -18,25 +18,26 @@ const subHeadingStyle = {
     marginBottom: 30,
 };
 
-const PageHeading = ({ title, subHeading }) => {
-    console.log(title);
-
-    return (
-      <div>
-        <h3 style={headingStyle}>
-          {title}
-        </h3>
-        <p style={subHeadingStyle}>
-          {subHeading}
-        </p>
-      </div>
+const PageHeading = ({ title, subHeading }) => (
+  <div>
+    <h3 style={headingStyle}>
+      {title}
+    </h3>
+    <p style={subHeadingStyle}>
+      {subHeading}
+    </p>
+  </div>
     );
-};
 
 PageHeading.propTypes = {
     title: PropTypes.string,
     subHeading: PropTypes.string,
 
+};
+
+PageHeading.defaultProps = {
+  title: 'Title',
+  subHeading: undefined,
 };
 
 export default PageHeading;
