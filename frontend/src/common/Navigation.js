@@ -65,24 +65,30 @@ class Navigation extends Component {
   render() {
     const { classes } = this.props;
 
-    return (
+    window.gapi.load('auth2', () => {
+      window.gapi.auth2.init();
+    });
+
+
+    return (this.props.user.signedIn ?
       <div className={this.props.classes.root}>
         <AppBar className={classes.appBar} position="static">
           <Toolbar>
             <Typography type="headline" color="inherit" className={classes.flex}>
-              GoOutside
+                GoOutside
             </Typography>
             {
 
-          this.props.user && (
-            <Button variant="flat" onClick={this.logOut} >
-              <FontAwesome name="cog" color="white" />
-            </Button>
-          )
-        }
+            this.props.user.signedIn && (
+              <Button variant="flat" onClick={this.logOut} >
+                <FontAwesome name="cog" color="white" />
+              </Button>
+            )
+          }
           </Toolbar>
         </AppBar>
       </div>
+      : <div />
     );
   }
 }

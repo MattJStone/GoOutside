@@ -1,42 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
-const headingStyle = {
-    width: '100%',
-    verticalAlign: 'middle',
-    textAlign: 'center',
-    height: 50,
-    marginTop: 30,
-    marginBottom: 10,
-};
-
-const subHeadingStyle = {
-    width: '100%',
-    verticalAlign: 'middle',
-    textAlign: 'center',
-    marginBottom: 30,
-};
+import Typography from 'material-ui-next/Typography';
 
 const PageHeading = ({ title, subHeading }) => (
   <div>
-    <h3 style={headingStyle}>
+    <Typography type="headline" align="center" gutterBottom style={{ marginTop: 30 }}>
       {title}
-    </h3>
-    <p style={subHeadingStyle}>
+    </Typography>
+    <Typography type="subheading" align="center" gutterBottom style={{ marginBottom: 30 }}>
       {subHeading}
-    </p>
+    </Typography>
   </div>
     );
 
 PageHeading.propTypes = {
-    title: PropTypes.string,
+    title: PropTypes.string.isRequired,
     subHeading: PropTypes.string,
 
 };
 
 PageHeading.defaultProps = {
-  title: 'Title',
   subHeading: undefined,
 };
 

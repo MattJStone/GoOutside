@@ -1,4 +1,4 @@
-import { GET_FAMILY_GROUP } from '../common/constants';
+import { GET_FAMILY_GROUP, NEW_FAMILY_GROUP } from '../common/constants';
 import defaults from './initialState';
 
 export default function (state = defaults.familyGroup, action) {
@@ -6,7 +6,11 @@ export default function (state = defaults.familyGroup, action) {
         case GET_FAMILY_GROUP:
             return action.familyGroup;
 
-            default:
-                return state;
+        case NEW_FAMILY_GROUP:
+            return action;
+        default:
+            return state;
+
+            
     }
 }

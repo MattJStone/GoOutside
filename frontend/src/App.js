@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Reboot from 'material-ui-next/Reboot';
 
 import Loadable from 'react-loading-overlay';
 import Theme from '../src/styles/theme';
 import Navigation from './common/Navigation';
 import FamilyGroups from './components/familyGroups/FamilyGroupsPage';
-import FamilyGroup from './components/familyGroup/FamilyGroupPage';
-import Signin from './components/auth/SignInPageYolo';
 
-import TextField from 'material-ui-next/TextField';
+import Signin from './components/auth/SignInPageYolo';
+import NewFamilyGroupPage from './components/familyGroup/add/NewFamilyGroupPage';
 
 
 class App extends Component {
@@ -19,21 +17,22 @@ class App extends Component {
       return (
         <div>
           <Theme>
-          <BrowserRouter>
+            <BrowserRouter>
 
-            <Loadable active={this.props.spinner.display} spinner text={this.props.spinner.spinnerText} >
-              <header className="App-header">
-                <Navigation />
-              </header>
-              <section className="main-content-wrapper">
-                <Route exact path="/" component={FamilyGroups} />
-                <Route path="/familyGroup/:familyGroupId" component={FamilyGroup} />
-                <Route path="/signin" component={Signin} />                
-              </section>
-            </Loadable>
+              <div>
+                <header className="App-header">
+                  <Navigation />
+                </header>
+                <div >
+                  <Route exact path="/" component={FamilyGroups} />
 
-          </BrowserRouter>
-        </Theme>
+                  <Route path="/signin/:source?" component={Signin} />
+                  <Route path="/addFamily" component={NewFamilyGroupPage} />
+                </div>
+
+              </div>
+            </BrowserRouter>
+          </Theme>
         </div>
 
       );

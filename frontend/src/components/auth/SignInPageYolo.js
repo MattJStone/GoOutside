@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Grid from 'material-ui-next/Grid';
 
 import * as actions from '../../actions/authActions';
+import Typography from 'material-ui-next/Typography';
 
 
 class SignInPage extends Component {
@@ -123,12 +124,15 @@ class SignInPage extends Component {
         console.log('componentWillReceiveProps');
         if (this.props.user) {
             console.log('redirect');
-            this.props.history.push('/');
+            if (this.props.match.params.source)
+                this.props.history.push('/' + this.props.match.params.source);
+            else
+                this.props.history.push('/');
         }
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.manual);
+        console.log(this.props.match.params.source);
 
             window.gapi.signin2.render('my-signin2', {
                 scope: 'profile email',
@@ -151,20 +155,28 @@ class SignInPage extends Component {
         const { user } = this.props;        
 
         return (
-            
-            <Grid container justify="center">
-                <div style={{ width: '650px' }}>
-                    <Grid container justify="center" alignItems="center" spacing={24}>
+            <div style={{backgroundColor: '#80d8ff',top:0, left:0, position:'absolute',      
+            width: '100%',
+            height: '100%'
 
-                        <Grid item md={6} lg={6} style={{ marginTop: 40 }}>
-                            <img src="/stockImages/gooutisideLogin.jpg" alt="logo" />
-                        </Grid>
-                        <Grid item md={6} lg={6}>
-                            <div id="my-signin2"/>                                                        
-                        </Grid>
-                        </Grid>
-                </div>
-            </Grid>
+            }}>                                
+                <Grid container justify="center" alignItems="center" alignContent="center" direction="column" spacing={40}>                                                            
+                    <Grid item md={12} lg={12} style={{ marginTop: 40 }}>
+                        <img src="/stockImages/gooutisideLogin.jpg" alt="logo" />
+                    </Grid>
+                    <Grid item sm={12} md={12} lg={12} style={{ marginTop: 40 }}>                                        
+                        <Typography type="display3" style={{color:"#ffffff", textAlign: 'center'}}>
+                            GoOutside
+                        </Typography>
+                        <Typography type="subheading" style={{color:"#ffffff", textAlign: 'center'}}>
+                            ...get the kids off the screen and outside...
+                        </Typography>
+                    </Grid>
+                    <Grid item md={6} lg={6}>
+                        <div id="my-signin2"/>                                                        
+                    </Grid>                                                                                        
+                </Grid>                                
+            </div>
         )
     }
 }

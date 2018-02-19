@@ -14,10 +14,11 @@ class FamilyGroupsPage extends Component {
         this.state = {
             familyGroups: [],
         };
+
+        this.showNewFamily = this.showNewFamily.bind(this);
     }
 
     componentDidMount() {
-        console.log('Family group page is mounted');
         if (this.props.user.signedIn) {
             this.props.getFamilyGroups();
         } else {
@@ -37,11 +38,17 @@ class FamilyGroupsPage extends Component {
         }
     }
 
+    showNewFamily() {
+        
+        //this.props.history.push('/addFamily');
+       
+      }
+
     render() {
         const { familyGroups } = this.state;
 
         if (familyGroups.length === 0) return <div>loading...</div>;
-        
+
         familyGroups.push({ id: 'empty', name: 'Create a new family to control!' });
 
         return (
@@ -65,7 +72,6 @@ FamilyGroupsPage.propTypes = {
     familyGroups: PropTypes.array.isRequired,
     getFamilyGroups: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
